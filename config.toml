@@ -66,8 +66,3 @@ pygmentscodefencesguesssyntax = true
   # facebook = " "
   # weibo = " "
   # instagram = " "
-
-[markup]
-[markup.goldmark]
-[markup.goldmark.renderer]
-  unsafe = true

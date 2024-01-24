@@ -8,10 +8,14 @@ summaryLength = 100
 paginate = 4
 enableEmoji = true
 enableRobotsTXT = true
+googleAnalytics = ""
 
 pygmentsUseClasses = true
 pygmentCodeFences = true
 pygmentscodefencesguesssyntax = true
+
+[author]
+  name = "C1ph3rX13"
 
 [blackfriday]
   smartypants = false
@@ -38,7 +42,6 @@ pygmentscodefencesguesssyntax = true
   url = "/about/"
 
 [params]
-  name = "C1ph3rX13"
   subTitle = "Days are just days"
   keywords = ["C1ph3rX13"]
   description = "C1ph3rX13"

@@ -8,7 +8,6 @@ summaryLength = 100
 paginate = 4
 enableEmoji = true
 enableRobotsTXT = true
-googleAnalytics = ""
 
 pygmentsUseClasses = true
 pygmentCodeFences = true

@@ -6,3 +6,8 @@ draft: false
 ---
 
 https://github.com/C1ph3rX13
+
+## Tools
+
+[CyberChef](https://gchq.github.io/CyberChef/)
+

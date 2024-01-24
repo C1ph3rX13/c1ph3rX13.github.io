@@ -5,5 +5,17 @@ hidden: true
 draft: false
 ---
 
+## Cryptography
+
 [CyberChef](https://gchq.github.io/CyberChef/)
+
+## Python
+
+[Curlconverter: Convert curl commands to code](https://curlconverter.com/)
+
+[Chrome for Testing availability](https://googlechromelabs.github.io/chrome-for-testing/)
+
+## Rust
+
+[Rust Course](https://course.rs/about-book.html)
 

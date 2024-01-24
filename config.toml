@@ -40,6 +40,11 @@ pygmentscodefencesguesssyntax = true
   weight = 40
   identifier = "about"
   url = "/about/"
+[[menu.main]]
+  name = "Tools"
+  weight = 50
+  identifier = "tools"
+  url = "/tools/"
 
 [params]
   subTitle = "Days are just days"

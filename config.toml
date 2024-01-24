@@ -7,7 +7,7 @@ hasCJKLanguage = true
 summaryLength = 100
 paginate = 4
 enableEmoji = true
-enableRobotsTXT = true # 允许爬虫抓取到搜索引擎
+enableRobotsTXT = true
 googleAnalytics = ""
 
 pygmentsUseClasses = true

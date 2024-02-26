@@ -19,3 +19,24 @@ draft: false
 
 [Rust Course](https://course.rs/about-book.html)
 
+## The Undocumented Functions
+
+Microsoft Windows NT/2000/XP/Win7
+
+### 内核函数参数查询
+
+https://undocumented-ntinternals.github.io/
+
+http://undocumented.ntinternals.net/
+
+### 内核结构体查询
+
+https://www.vergiliusproject.com/
+
+## Windows X86-64 System Call Table (XP/2003/Vista/7/8/10/2022/11)
+
+https://j00ru.vexillium.org/syscalls/nt/64/
+
+https://processhacker.sourceforge.io/doc/index.html
+
+https://ntdoc.m417z.com/

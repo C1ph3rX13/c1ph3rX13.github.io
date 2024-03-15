@@ -40,3 +40,9 @@ https://j00ru.vexillium.org/syscalls/nt/64/
 https://processhacker.sourceforge.io/doc/index.html
 
 https://ntdoc.m417z.com/
+
+## Living Off The Land Binaries, Scripts and Libraries
+
+https://lolbas-project.github.io/
+
+https://gtfobins.github.io/

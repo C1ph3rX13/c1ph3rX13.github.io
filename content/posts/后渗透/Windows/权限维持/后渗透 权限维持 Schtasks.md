@@ -10,6 +10,8 @@ tags: ["后渗透","权限维持","Schtasks","Windows"]
 
 后渗透 权限维持 计划任务
 
+[schtasks create | Microsoft Learn](https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/schtasks-create)
+
 ## 0x01 Schtasks
 
 ### 创建计划任务
@@ -48,8 +50,15 @@ schtasks /end
 ### 创建定时计划任务
 
 + `<Task Name>`：计划任务的名称。
+
 + `<command>`：要执行的命令或脚本的路径。
+
 + `<starttime>`：指定运行任务的开始时间。时间格式为 HH:mm (24 小时时间)，例如 14:30 表示2:30 PM。如果未指定 /ST，则默认值为当前时间。/SC ONCE 必需有此选项。
+
+  > - `/sc daily`：每天执行一次任务
+  > - `/sc weekly`：每周执行一次任务
+  > - `/sc monthly`：每月执行一次任务
+
 + `<startdate>`：计划任务的开始日期。可以使用当前日期，例如YYYY/MM/DD
 
 ~~~cmd

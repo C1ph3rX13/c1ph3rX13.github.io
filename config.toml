@@ -1,0 +1,75 @@
+baseURL = "https://C1ph3rX13.github.io"
+languageCode = "en"
+defaultContentLanguage = "en"
+title = "C1ph3rX13"
+theme = "zozo"
+hasCJKLanguage = true
+summaryLength = 100
+paginate = 4
+enableEmoji = true
+enableRobotsTXT = true
+googleAnalytics = ""
+
+pygmentsUseClasses = true
+pygmentCodeFences = true
+pygmentscodefencesguesssyntax = true
+
+[author]
+  name = "C1ph3rX13"
+
+[blackfriday]
+  smartypants = false
+
+[[menu.main]]
+  name = "Home"
+  weight = 10
+  identifier = "home"
+  url = "/"
+[[menu.main]]
+  name = "Archive"
+  weight = 20
+  identifier = "archive"
+  url = "/posts/"
+[[menu.main]]
+  name = "Tags"
+  weight = 30
+  identifier = "tags"
+  url = "/tags/"
+[[menu.main]]
+  name = "About"
+  weight = 40
+  identifier = "about"
+  url = "/about/"
+[[menu.main]]
+  name = "Tools"
+  weight = 50
+  identifier = "tools"
+  url = "/tools/"
+
+[params]
+  subTitle = "Days are just days"
+  keywords = ["C1ph3rX13"]
+  description = "C1ph3rX13"
+  enableMathJax = true
+  enableSummary = true
+  mainSections = ["posts","post"]
+  fancybox = true
+  
+# Valine.
+# You can get your appid and appkey from https://leancloud.cn
+# more info please open https://valine.js.org
+[params.valine]
+  enable = false
+  appId = ""
+  appKey = ""
+  placeholder = " "
+  visitor = true
+
+# Your socail's url
+# 社交地址配置
+[social]
+  github = "https://github.com/C1ph3rX13"
+  # twitter = " "
+  # facebook = " "
+  # weibo = " "
+  # instagram = " "

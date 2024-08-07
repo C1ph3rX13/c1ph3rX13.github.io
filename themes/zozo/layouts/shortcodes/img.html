@@ -1,0 +1,7 @@
+{{if .Page.Site.Params.fancybox }}
+<div class="fancybox">
+    <a data-fancybox="gallery" href="{{ .Get "src" }}" data-caption="{{ .Get "title" }}">
+        <img src="{{ .Get "src" }}" />
+    </a>
+</div>
+{{ end }}

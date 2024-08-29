@@ -1,20 +1,21 @@
 ---
-title: "Selenium Config Python"
+title: Selenium Config Python
 date: 2023-10-12T17:49:41+08:00
 draft: false
 url: /posts/2023-10-12/Selenium-Config-Python
-tags: ["Python","Selenium"]
+tags:
+  - Python
+  - Selenium
+slug: English-Preview
 ---
+> Selenium Python Usage Note
+> <!--more-->
 
-## 0x00 前言
+# Base Config
 
-Selenium Python Usage Note - Base Config
+## Webdriver Path
 
-## 0x01 Base Config
-
-### Webdriver Path
-
-#### error output
+### error output
 
 ```python
 WebDriver.__init__() got an unexpected keyword argument 'executable_path'
@@ -46,11 +47,11 @@ from selenium.webdriver.chrome.options import Options
 	driver = webdriver.Chrome(service=service, options=options)
 ```
 
-#### 参考
+### 参考
 
 Selenium Github：https://github.com/SeleniumHQ/selenium/commit/9f5801c82fb3be3d5850707c46c3f8176e3ccd8e
 
-### Set ChromeOptions
+## Set ChromeOptions
 
 设置 Chrome 的启动参数
 
@@ -61,15 +62,15 @@ Selenium Github：https://github.com/SeleniumHQ/selenium/commit/9f5801c82fb3be3d
 	options.add_argument('--window-size=1400,800')
 ```
 
-#### 参考
+### 参考
 
 Selenium Wiki：https://www.selenium.dev/zh-cn/documentation/webdriver/browsers/chrome/
 
 Google：https://chromedriver.chromium.org/capabilities
 
-### Wait
+## Wait
 
-#### Explicit waits
+### Explicit waits
 
 显式等待：等待元素加载完成才进行定位
 
@@ -88,9 +89,9 @@ from selenium.webdriver.support.wait import WebDriverWait
     wait.until(lambda btn_wait: btn.is_displayed())
 ```
 
-## 0x02 Action
+# Action
 
-### find_element()
+## find_element()
 
 **by**：指定按照对应的方式来定位元素，可以使用以下几种方式
 
@@ -112,16 +113,16 @@ from selenium.webdriver.common.by import By
 	password_input = browser.find_element(by=By.ID, value='password')
 ```
 
-### 执行 JavaScript
+## 执行 JavaScript
 
 ```python
 # 执行 JavaScript 代码，滚动到页面底部
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 ```
 
-## 0x03 Cookies Config
+# Cookies Config
 
-### 获取 Cookies 信息
+## 获取 Cookies 信息
 
 ```python
 # 获取当前页面的所有 cookie 信息 (返回字典)
@@ -137,7 +138,7 @@ driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         f.write(json_cookies)
 ```
 
-### 加载本地 Cookies
+## 加载本地 Cookies
 
 ```python
 def add_cookies():
@@ -155,7 +156,7 @@ def add_cookies():
         logger.error('Read Error: %s', error)
 ```
 
-### 利用 Cookies 进行自动登录
+## 利用 Cookies 进行自动登录
 
 ```python
 # 加载之前保存的 cookies
@@ -166,7 +167,7 @@ for cookie in cookies:
 driver.refresh()
 ```
 
-## 0x04 ChromeOptions
+# ChromeOptions
 
 ```python
     options.add_argument('--no-sandbox') # 解决DevToolsActivePort文件不存在的报错
@@ -186,10 +187,9 @@ driver.refresh()
     options.add_argument('--no-default-browser-check')
 ```
 
-## 0x05 Proxy
+# Proxy
 
 设置代理
-
 ```python
     if PROXIES:
         options.add_argument(f"--proxy-server={PROXIES['all://']}")

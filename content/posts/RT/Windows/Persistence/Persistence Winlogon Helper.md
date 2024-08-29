@@ -7,13 +7,11 @@ tags:
   - Windows
   - Persistence
   - Winlogon-Helper
+slug: English-Preview
 ---
-
-## 0x00 前言
-
-Persistence Winlogon Helper
-
-## 0x01 Winlogon Helper
+> Persistence Winlogon Helper
+<!--more-->
+# Winlogon Helper
 
 `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon`的作用是指定用户登录时 Winlogon 运行的程序
 
@@ -45,7 +43,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\cscdll" /v DLLName /d "<path to dll>" /f
 ```
 
-## 0x02 利用方法
+# 利用方法
 
 Userinit 键默认的值为`C:\Windows\system32\userinit.exe`，修改注册表项`Userinit`以包含任意负载将导致系统在 Windows 登录期间运行两个可执行文件
 

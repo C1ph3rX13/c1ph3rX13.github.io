@@ -7,15 +7,13 @@ tags:
   - Windows
   - Persistence
   - Screensaver
+slug: English-Preview
 ---
+> Persistence Screensaver
+<!--more-->
+# 屏幕保护程序
 
-## 0x00 前言
-
-Persistence Screensaver
-
-## 0x01 屏幕保护程序
-
-### Screensaver
+## Screensaver
 
 屏幕保护程序是具有 .scr 文件扩展名的可执行文件，并通过 scrnsave.scr 实用程序执行
 
@@ -28,7 +26,7 @@ HKEY_CURRENT_USER\Control Panel\Desktop\ScreenSaverIsSecure
 HKEY_CURRENT_USER\Control Panel\Desktop\ScreenSaveTimeOut
 ```
 
-## 0x02 利用方法
+# 利用方法
 
 如果从未设置过屏保程序的话，除“ScreenSaveActive”默认值为1，其他键都是不存在的；屏保程序的正常运行必须保证这几个键都有数据才可以，因此必须把4个键都重写一遍；经测试屏保程序最短触发时间为60秒，即使改成小于60的数值，依然还是60秒后执行程序
 

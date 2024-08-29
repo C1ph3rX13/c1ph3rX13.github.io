@@ -6,19 +6,15 @@ url: /posts/2023-08-23/Removal
 tags:
   - Windows
   - Removal
+slug: English-Preview
 ---
+> Removal
+> https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/wevtutil
+> <!--more-->
+# 清除系统日志
 
-## 0x00 前言
+## PowerShell 删除
 
-Removal
-
-微软文档：https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/wevtutil
-
-## 0x01 清除系统日志
-
-### 通过 PowerShell 删除
-
-#### 方法一
 
 ```powershell
 # Usage
@@ -34,8 +30,6 @@ PowerShell -Command "& {Clear-Eventlog -Log ForwardedEvents}"
 PowerShell -Command "& {Clear-Eventlog -Log Application,System,Security}"
 ```
 
-#### 方法二
-
 ```powershell
 # Usage
 PowerShell -Command "& Get-WinEvent -ListLog 你要清理的日志(如Security) -Force | % {Wevtutil.exe cl $_.Logname}"
@@ -49,16 +43,16 @@ PowerShell -Command "& Get-WinEvent -ListLog Security -Force | % {Wevtutil.exe c
 PowerShell -Command "& Get-WinEvent -ListLog Application,Setup,Security -Force | % {Wevtutil.exe cl $_.Logname}"
 ```
 
-### 使用 wevtutil 删除
+## wevtutil 删除
 
-#### 统计日志列表数目信息
+### 统计日志列表数目信息
 
 ```powershell
 wevtutil.exe gli Application
 wevtutil.exe gli Security
 ```
 
-#### 查询指定类别的日志
+### 查询指定类别的日志
 
 ```powershell
 # Usage
@@ -67,7 +61,7 @@ wevtutil qe <log name> /c:<line> /f:text
 wevtutil qe Security /f:text
 ```
 
-#### 全量删除
+### 全量删除
 
 ```powershell
 # 变量名需要大写
@@ -78,7 +72,7 @@ wevtutil cl System
 # 会留下一个事件id为1102的日志
 ```
 
-#### 定向清理
+### 定向清理
 
 ```powershell
 # Usage
@@ -87,7 +81,7 @@ wevtutil qe <log name> /f:text /rd:true /c:<line>
 wevtutil qe Security /f:text /rd:true /c:10
 ```
 
-#### 删除某指定单条记录
+### 删除某指定单条记录
 
 1. 删除 EventRecordID 指定的日志
 
@@ -119,16 +113,16 @@ copy tmp.evtx %SystemRoot%\System32\winevt\Logs\Security.evtx
 net start eventlog
 ```
 
-## 0x02 暴力删除日志文件
+# 暴力删除日志文件
 
-#### 停止 Windows Event Log 服务
+### 停止 Windows Event Log 服务
 
 ```powershell
 # 强制停止 Windows Event Log
 net stop eventlog /y
 ```
 
-#### 删除对应的文件
+### 删除对应的文件
 
 ```powershell
 # 日志文件路径
@@ -144,9 +138,9 @@ C:\Windows\System32\winevt\Logs
 %SystemDrive%\inetpub\logs\LogFiles\W3SVC1\
 ```
 
-## 0x03 Windows 远程连接日志
+# Windows 远程连接日志
 
-### 删除 Default.rdp 文件
+## 删除 Default.rdp 文件
 
 使用`attrib`去掉`Default.rdp`文件：系统文件属性(S)，隐藏文件属性(H)之后删除
 
@@ -154,7 +148,7 @@ C:\Windows\System32\winevt\Logs
 attrib "%userprofile%\documents\Default.rdp" -s -h && del "%userprofile%\documents\Default.rdp"
 ```
 
-### 注册表清理
+## 注册表清理
 
 查询远程连接在注册表中的键值
 
@@ -180,9 +174,9 @@ reg query "HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Servers"
 reg delete "HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Servers\192.168.52.138" /f 
 ```
 
-## 0x04 删除文件
+# 删除文件
 
-### Recent
+## Recent
 
 ```powershell
 del /f /s /q "%userprofile%\Recent*.*"
@@ -190,7 +184,7 @@ del /f /s /q "%userprofile%\Recent*.*"
 C:/Users/Administrator/AppData/Local/Microsoft/Windows/History
 ```
 
-### Amcache / RecentFileCache.bcf
+## Amcache / RecentFileCache.bcf
 
 Windows中的使用这两个文件来跟踪具有不同可执行文件的应用程序兼容性问题，它可用于确定可执行文件首次运行的时间和最后修改时间
 
@@ -206,7 +200,7 @@ del /f /s /q "C:\Windows\AppCompat\Programs\RecentFileCache.bcf"
 del /f /s /q "C:\Windows\AppCompat\Programs\Amcache.hve"
 ```
 
-### Prefetch
+## Prefetch
 
 预读取文件夹，用来存放系统已访问过的文件的预读信息，扩展名为PF。位置在 `C:\Windows\Prefetch` 
 
@@ -214,7 +208,7 @@ del /f /s /q "C:\Windows\AppCompat\Programs\Amcache.hve"
 del /f /s /q "C:\Windows\Prefetch\*"
 ```
 
-### JumpLists
+## JumpLists
 
 记录用户最近使用的文档和应用程序，方便用户快速跳转到指定文件，位置在 `%APPDATA%\Microsoft\Windows\Recent` 
 
@@ -222,9 +216,9 @@ del /f /s /q "C:\Windows\Prefetch\*"
 del /f /s /q "%APPDATA%\Microsoft\Windows\Recent\*"
 ```
 
-## 0x05 格式化磁盘
+# 格式化磁盘
 
-### 彻底格式化
+## 彻底格式化
 
 多次覆写文件 
 
@@ -237,4 +231,3 @@ cipher /w:<path>
 ```powershell
 format D: /P:<count>
 ```
-

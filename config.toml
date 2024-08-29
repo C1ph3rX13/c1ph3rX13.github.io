@@ -18,7 +18,7 @@ pygmentscodefencesguesssyntax = true
   name = "C1ph3rX13"
 
 [blackfriday]
-  smartypants = false
+  smartypants = true
 
 [[menu.main]]
   name = "Home"
@@ -48,6 +48,7 @@ pygmentscodefencesguesssyntax = true
 
 [params]
   subTitle = "Days are just days"
+  # footerSlogan = "Days are just days"
   keywords = ["C1ph3rX13"]
   description = "C1ph3rX13"
   enableMathJax = true
@@ -73,3 +74,8 @@ pygmentscodefencesguesssyntax = true
   # facebook = " "
   # weibo = " "
   # instagram = " "
+
+[markup]
+[markup.goldmark]
+[markup.goldmark.renderer]
+  unsafe = true

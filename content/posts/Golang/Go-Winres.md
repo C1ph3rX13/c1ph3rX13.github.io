@@ -1,28 +1,28 @@
 ---
-title: "Go Winres"
+title: Go Winres
 date: 2023-11-20T10:43:16+08:00
 draft: false
 url: /posts/2023-11-20/Go-Winres
-tags: ["Golang","Go-Winres"]
+tags:
+  - Golang
+  - Go-Winres
+slug: English-Preview
 ---
+> Go-Winres 编译添加资源和程序信息
+# go-winres
 
-## 0x00 前言
-
-Go编译添加资源和程序信息
-
-## 0x01 go-winres
-
-### 项目地址
+## 项目地址
 
 https://github.com/tc-hib/go-winres
+<!--more-->
 
-### 安装
+## 安装
 
 ```powershell
 go install github.com/tc-hib/go-winres@latest
 ```
 
-### 初始化
+## 初始化
 
 在编译目录下初始化，生成一个配置模板。初始化会生成`winres`目录，其中`winres.json`为配置文件，两个`png`文件是自带的图标文件
 
@@ -30,9 +30,9 @@ go install github.com/tc-hib/go-winres@latest
 go-winres init
 ```
 
-### 修改配置
+## 修改配置
 
-#### 图标指定
+### 图标指定
 
 1. 把图标放在和`winres.json`同级目录下
 2. 修改`0000`这个属性中的值
@@ -49,7 +49,7 @@ go-winres init
 }
 ```
 
-#### 软件清单
+### 软件清单
 
 软件清单部分声明在`RT_MANIFEST`属性中
 
@@ -97,7 +97,7 @@ go-winres init
 
 对于`identify`属性，普通应用程序建议留空即可，也可以将其删除。
 
-#### 元数据信息
+### 元数据信息
 
 ```
   "RT_VERSION": {
@@ -140,9 +140,9 @@ go-winres init
   - `OriginalFilename` 原始文件名
   - `ProductName` 程序名称
 
-## 0x02 编译
+# 编译
 
-### 编译后无图标
+## 编译后无图标
 
 不能指定文件编译
 
@@ -150,7 +150,7 @@ go-winres init
 go build -ldflags="-s -w" -trimpath
 ```
 
-### Patch方法添加图标
+## Patch方法添加图标
 
 ```powershell
 go-winres patch --in .\winres\winres.json target.exe

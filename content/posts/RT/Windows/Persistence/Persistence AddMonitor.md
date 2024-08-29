@@ -7,19 +7,18 @@ tags:
   - AddMonitor
   - Windows
   - Persistence
+slug: "English-Preview"
 ---
+> Persistence AddMonitor
+<!--more-->
 
-## 0x00 前言
-
-Persistence AddMonitor
-
-## 0x01 AddMonitor
+# AddMonitor
 
 打印后台处理程序服务负责管理 Windows 操作系统中的打印作业。与服务的交互是通过 Print Spooler API 执行的，该 API 包含一个函数 ( **AddMonitor** )，可用
 
 于安装本地端口监视器并连接配置、数据和监视器文件。该函数能够将 DLL 注入**spoolsv.exe**进程，并通过创建注册表项
 
-### 编译注册
+## 编译注册
 
 ```c
 #include "stdafx.h"

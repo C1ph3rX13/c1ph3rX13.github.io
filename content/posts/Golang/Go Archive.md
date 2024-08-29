@@ -1,18 +1,18 @@
 ---
-title: "Go Archive"
+title: Go Archive
 date: 2023-10-25T09:36:19+08:00
 draft: false
 url: /posts/2023-09-21/Go-Archive
-tags: ["Golang","Archive","解压缩"]
+tags:
+  - Golang
+  - Archive
+  - 解压缩
+slug: English-Preview
 ---
+> Golang  `tar, gzip, zip `
+# tar
 
-## 0x00 前言
-
-Golang  `tar, gzip, zip `
-
-## 0x01 tar
-
-### 创建tar文件
+## 创建tar文件
 
 使用 `os.Create()` 函数创建一个新的tar文件
 
@@ -23,8 +23,9 @@ if err != nil {
 }
 defer tarFile.Close()
 ```
+<!--more-->
 
-### 创建tar.Writer
+## 创建tar.Writer
 
 使用 `tar.NewWriter()` 函数创建一个新的 `tar.Writer`，将tar文件和相应的写入流关联起来
 
@@ -33,7 +34,7 @@ tarWriter := tar.NewWriter(tarFile)
 defer tarWriter.Close()
 ```
 
-### 获取被归档的文件信息
+## 获取被归档的文件信息
 
 使用 `os.Open()` 和 `Stat()` 来获取，之后使用 `tarWriter.WriteHeader()` 写入文件信息
 
@@ -122,7 +123,7 @@ type Header struct {
 
 这些参数用于描述和标识打包文件的属性，以便在解包时正确地还原文件的属性信息。根据需要，可以设置这些字段来自定义打包文件的属性。
 
-### 完成tar打包
+## 完成tar打包
 
 使用`tarWriter.Close()`方法完成tar打包过程，并关闭tar文件。
 
@@ -133,9 +134,9 @@ type Header struct {
 	}
 ```
 
-## 0x02 gz
+# gz
 
-### 创建输出文件
+## 创建输出文件
 
 ```go
 	// 创建输出文件
@@ -146,14 +147,14 @@ type Header struct {
     defer gzFile.Close()
 ```
 
-### 创建gzip.Writer
+## 创建gzip.Writer
 
 ```go
 	gzipWriter := gzip.NewWriter(gzFile)
     defer gzipWriter.Close()
 ```
 
-### 设置元数据
+## 设置元数据
 
 ```go
 	// 设置元数据
@@ -207,7 +208,7 @@ type Header struct {
   - 14：Acorn RISCOS
   - 15：Unknown
 
-### 设置压缩级别
+## 设置压缩级别
 
 **设置压缩级别要在设置元数据之前，否则会造成元数据缺失**
 
@@ -259,7 +260,7 @@ const (
 - `gzip.BestSpeed`：最快速的压缩级别，值为`1`。该级别会以更快的速度进行压缩，但压缩比会相对较低。适用于对压缩速度要求较高的场景；
 - `gzip.BestCompression`：最高压缩级别，值为`9`。该级别会以更高的压缩比进行压缩，但压缩速度会相对较慢。适用于对压缩比要求较高的场景。
 
-### 写入数据
+## 写入数据
 
 ```go
     data := []byte("This is the content to be compressed.")
@@ -278,7 +279,7 @@ const (
 	}
 ```
 
-### 刷新缓冲区
+## 刷新缓冲区
 
 使用`gzipWriter.Flush()`方法刷新`gzip.Writer`对象的缓冲区，确保所有数据都被写入输出文件
 
@@ -289,7 +290,7 @@ const (
     }
 ```
 
-### 结束打包
+## 结束打包
 
 使用`gzipWriter.Close()`方法结束打包过程，确保所有数据都被写入输出文件并关闭相关资源
 
@@ -300,9 +301,9 @@ const (
     }
 ```
 
-### 0x03 zip
+# zip
 
-### 创建ZIP文件
+## 创建ZIP文件
 
 使用`os.Create`函数创建一个新的ZIP文件，并获得一个`io.Writer`接口用于写入ZIP文件的内容
 
@@ -314,7 +315,7 @@ const (
     defer zipFile.Close()
 ```
 
-### 创建ZIP写入器
+## 创建ZIP写入器
 
 使用`zip.NewWriter`函数创建一个新的ZIP写入器，将ZIP文件的内容写入到之前创建的ZIP文件中
 
@@ -323,7 +324,7 @@ const (
     defer zipWriter.Close()
 ```
 
-### 添加文件到ZIP文件中
+## 添加文件到ZIP文件中
 
 通过调用`zipWriter.Create`方法创建一个新文件的写入器，并将文件的内容写入到ZIP文件中。可以使用循环来添加多个文件
 
@@ -361,7 +362,7 @@ const (
 	}
 ```
 
-### 设置文件的元数据
+## 设置文件的元数据
 
 可以使用`fileWriter`的`FileInfo`方法来获取文件的元数据，并进一步设置ZIP文件中的文件属性，如权限、修改时间等
 
@@ -409,7 +410,7 @@ const (
 	}
 ```
 
-### 完成ZIP打包
+## 完成ZIP打包
 
 在完成所有文件的添加后，需要调用`zipWriter.Close`方法来完成ZIP文件的打包，将ZIP文件的目录信息写入到ZIP文件中，并关闭ZIP写入器
 

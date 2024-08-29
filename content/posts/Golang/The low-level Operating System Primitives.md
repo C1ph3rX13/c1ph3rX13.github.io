@@ -1,16 +1,22 @@
 ---
-title: "The Low Level Operating System Primitives"
+title: The Low Level Operating System Primitives
 date: 2024-01-30T14:55:04+08:00
 draft: false
 url: /posts/2024-01-30/The-low-level-Operating-System-Primitives
-tags: ["Golang","syscall","windows"]
+tags:
+  - Golang
+  - syscall
+  - windows
+slug: English Preview
 ---
+> The Low Level Operating System Primitives
+> <!--more-->
 
-## [syscall package](https://pkg.go.dev/syscall?GOOS=windows)
+# [syscall package](https://pkg.go.dev/syscall?GOOS=windows)
 
-### 加载动态链接库（DLL）
+## 加载动态链接库（DLL）
 
-####   syscall.LoadDLL
+### syscall.LoadDLL
 
 - LoadDLL函数用于显式地加载一个DLL，并返回一个`syscall.DLL`对象和一个`error`。`syscall.DLL`对象包含了DLL的句柄以及导出函数的地址。
 - 当使用LoadDLL函数加载DLL时，如果加载失败，会返回一个非`nil`的`error`，并且需要检查`error`来处理加载失败的情况。
@@ -67,7 +73,7 @@ func MustLoadDLL(name string) *DLL {
 }
 ```
 
-#### syscall.NewLazyDLL
+### syscall.NewLazyDLL
 
 - NewLazyDLL函数用于创建一个`*syscall.LazyDLL`对象，该对象包含了DLL的名称和导出函数的延迟加载信息。
 - LazyDLL对象并不立即加载DLL，而是在调用其Load方法时才会去加载DLL，并返回一个`*syscall.LazyDLL`对象和一个`error`。这样做的好处是可以将DLL的加载延迟到需要使用其中的函数时再进行。
@@ -134,12 +140,11 @@ func NewLazyDLL(name string) *LazyDLL {
 	return &LazyDLL{Name: name}
 }
 ```
+# [windows package](https://pkg.go.dev/golang.org/x/sys)
 
-## [windows package](https://pkg.go.dev/golang.org/x/sys)
+## 加载动态链接库（DLL）
 
-#### 加载动态链接库（DLL）
-
-#### windows.LoadDLL
+### windows.LoadDLL
 
 - `LoadDLL`函数用于显式地加载一个非系统的DLL，并返回一个`*windows.DLL`对象和一个error。`*windows.DLL`对象包含了DLL的句柄以及导出函数的地址。
 - 与`syscall.LoadDLL`类似，`windows.LoadDLL`用于显式加载非系统DLL的方法。
@@ -171,7 +176,7 @@ func LoadDLL(name string) (dll *DLL, err error) {
 }
 ```
 
-#### windows.MustLoadDLL
+### windows.MustLoadDLL
 
 - `MustLoadDLL`函数用于加载一个非系统的DLL。它会在加载失败时直接panic，因此适用于对加载DLL失败情况没有特别处理逻辑的场景。
 - `MustLoadDLL`函数与`syscall.MustLoadDLL`类似，但是在`windows`包中专门用于加载非系统DLL。
@@ -187,7 +192,7 @@ func MustLoadDLL(name string) *DLL {
 }
 ```
 
-#### windows.NewLazyDLL & windows.NewLazySystemDLL
+### windows.NewLazyDLL & windows.NewLazySystemDLL
 
 - `LazySystemDLL`是一个类型，表示系统的动态链接库。它实际上是`*windows.LazyDLL`类型的实例，用于延迟加载系统DLL。
 

@@ -1,20 +1,24 @@
 ---
-title: "Building a Dll With Go"
+title: Building a Dll With Go
 date: 2024-05-13T10:39:48+08:00
 draft: false
 url: /posts/2024-05-13/Building-a-dll-with-Go
-tags: ["Golang","Dll"]
+tags:
+  - Golang
+  - Dll
+slug: English Preview
 ---
+> Building a dll with Go
+> <!--more-->
 
-## Installation
+# Installation
 
 ### MingGW
 
 https://www.mingw-w64.org/
 
 https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/
-
-## Making DLLs
+# Making DLLs
 
 + 导入 `C` 模块
 + 导出函数需要`//export`标记，注意`//`与`export`之间没有空格：`//export FuncName`
@@ -37,7 +41,7 @@ func HelloWorld() {
 func main() {}
 ```
 
-## Compiling the DLL
+# Compiling the DLL
 
 ```cmd
 go -o dllmain.dll -buildmode=c-shared dllmain.go
@@ -45,7 +49,7 @@ go -o dllmain.dll -buildmode=c-shared dllmain.go
 go build -ldflags="-s -w" -buildmode=c-shared -o dllmain.dll -trimpath dllmain.go
 ```
 
-## To load and Execute a DLL
+# To load and Execute a DLL
 
 导入`.h`调用
 
@@ -61,7 +65,7 @@ func main() {
 }
 ```
 
-## Calling DLL
+# Calling DLL
 
 想要触发`init()`，需要导出一个函数作为类似`main()`的初始化触发点
 
@@ -136,7 +140,7 @@ func main() {
 }
 ```
 
-## Bypass
+# Bypass
 
 ```go
 	cmd := exec.Command("powershell.exe")

@@ -1,30 +1,34 @@
 ---
-title: "Cross Compiling & Conditional Compilation in Go"
+title: Cross Compiling & Conditional Compilation in Go
 date: 2023-09-13T18:01:32+08:00
 draft: false
 url: /posts/2023-09-13/Cross-Compiling&Conditional-Compilation-in-Go
-tags: ["Golang","Cross Compiling","Conditional Compilation"]
+tags:
+  - Golang
+  - Cross
+  - Compiling
+  - Conditional
+  - Compilation
+slug: English-Preview
 ---
+> Cross Compiling & Conditional Compilation in Go
+> <!--more-->
 
-## 0x00 前言
+# Cross Compiling
 
-Cross Compiling / Conditional Compilation in Go
+## 编译参数
 
-## 0x01 Cross Compiling
-
-### 编译参数
-
-#### GOOS
+### GOOS
 
 目标平台的操作系统（Darwin、Freebsd、Linux、Windows） 
 
-#### GOARCH
+### GOARCH
 
 目标平台的体系架构（386、amd64、arm） 交叉编译不支持 CGO 所以要禁用
 
-### 编译平台
+## 编译平台
 
-#### Linux
+### Linux
 
 Linux 下编译 Mac 和 Windows 64位可执行程序
 
@@ -33,7 +37,7 @@ CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -trimpath -o <F
 CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -trimpath -o <File Name>
 ```
 
-#### Windows
+### Windows
 
 Windows 下编译 Mac 和 Linux 64位可执行程序
 
@@ -49,7 +53,7 @@ SET GOARCH=amd64
 go build -ldflags="-s -w" -trimpath -o <File Name>
 ```
 
-#### Mac
+### Mac
 
 Mac 下编译 Linux 和 Windows 64位可执行程序
 
@@ -58,11 +62,11 @@ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -trimpath -o <Fi
 CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -trimpath -o <File Name>
 ```
 
-## 0x02 Conditional Compilation
+# Conditional Compilation
 
-### Build tags 构建标签
+## Build tags 构建标签
 
-#### 源码中插入注释
+### 源码中插入注释
 
 第一种实现条件编译的方法是在源码中插入注释，被称之为构建标签
 
@@ -82,7 +86,7 @@ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -trimpath -o <
 
 上面的例子，构建标签出现在某个源码文件的顶部，表示这个源码文件只会在支持kqueue的BSD系统中被编译
 
-#### 多个构建标签
+### 多个构建标签
 
 一个源码文件可以包含多个构建标签。构建规则是每个独立规则的逻辑与关系
 
@@ -95,7 +99,7 @@ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -trimpath -o <
 package main
 ```
 
-### File suffixes 文件名后缀
+## File suffixes 文件名后缀
 
 第二种条件编译的方法是通过源码文件的文件名实现的，这种方案比构造标签方案更简单
 
@@ -120,7 +124,7 @@ mypkg_plan9.go       // 只在 plan9 编译
 
 即使是在Linux或freebsd系统，这两个文件也会被忽略，原因是`go/build`包会忽略所有文件名以`.`和`_`开始的文件
 
-## 0x03 使用构建标签还是文件名后缀
+# 使用构建标签还是文件名后缀
 
 构建标签和文件名后缀在功能上是重叠的
 

@@ -6,15 +6,13 @@ url: /posts/2023-08-23/Information-Gathering-Windows
 tags:
   - Windows
   - Information-Gathering
+slug: English-Preview
 ---
+> Information Gathering Windows
+> <!--more-->
+# 域环境
 
-## 0x00 前言
-
-Information Gathering Windows
-
-## 0x01 域环境
-
-### 判断是否域环境
+## 判断是否域环境
 
 ~~~powershell
 # 查看当前⽹卡和IP信息
@@ -30,7 +28,7 @@ net config workstation
 net time /domain
 ~~~
 
-### 域内信息
+## 域内信息
 
 ~~~powershell
 # 获取域SID
@@ -60,7 +58,7 @@ net view /domain:<domain name>
 csvde -setspn <domain name> -f C:\windows\temp\xxx.csv
 ~~~
 
-### 域用户信息
+## 域用户信息
 
 ```powershell
 # 查询域内用户
@@ -82,7 +80,7 @@ net group /domain
 wmic useraccount get /all
 ```
 
-### 定位域控
+## 定位域控
 
 ```powershell
 # 查看域内时间
@@ -108,9 +106,9 @@ nltest /dsgetdc:<domain name> /server:<domain ip>
 net group "domain computers" /domain
 ```
 
-## 0x02 工作组环境
+# 工作组环境
 
-### 系统信息
+## 系统信息
 
 ~~~powershell
 # 获取本机⽹络配置信息
@@ -143,7 +141,7 @@ systeminfo
 wmic qfe get Caption,Description,HotFixID,InstalledOn
 ~~~
 
-### 进程信息
+## 进程信息
 
 查看当前进程列表和软件进程
 
@@ -163,7 +161,7 @@ tasklist /v
 tasklist /svc
 ```
 
-### 程序信息
+## 程序信息
 
 查看启动程序信息
 
@@ -177,7 +175,7 @@ wmic startup get command,caption
 wmic /namespace:\\root\securitycenter2 path antivirusproduct GET displayName,productState, pathToSignedProductExe
 ```
 
-### 用户信息
+## 用户信息
 
 查看有哪些用户
 
@@ -197,7 +195,7 @@ query user || qwinsta
 net localgroup administrators
 ```
 
-### 网络信息
+## 网络信息
 
 查看本机端口开放情况
 
@@ -252,7 +250,7 @@ netsh advfirewall firewall add rule name="Remote Desktop" dir=in protocol=TCP lo
 netsh advfirewall firewall show rule name="Remote Desktop"
 ```
 
-### 凭证信息
+## 凭证信息
 
 WiFi密码
 
@@ -260,9 +258,9 @@ WiFi密码
 Netsh wlan show profiles
 ```
 
-## 0x03 密码文件搜集
+# 密码文件搜集
 
-### 低权限下搜集当前机器各类密码文件
+## 低权限下搜集当前机器各类密码文件
 
 在当前目录及其子目录中搜索指定文件
 
@@ -304,13 +302,13 @@ dir /a /s /b "%drive%\*.txt" "%drive%\*.xls*" "%drive%\*.xlsx*" "%drive%\*.docx"
 echo "find success"
 ```
 
-### 循环搜集当前机器各类敏感密码配置文件
+## 循环搜集当前机器各类敏感密码配置文件
 
 ~~~powershell
 for /r c:\ %i in (pass.*) do @echo %i
 ~~~
 
-### findstr 查找某个文件的某个字段
+## findstr 查找某个文件的某个字段
 
 `findstr`：表示字符串查找命令
 

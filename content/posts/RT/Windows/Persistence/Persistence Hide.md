@@ -7,15 +7,14 @@ tags:
   - Windows
   - Persistence
   - Hide
+slug: English-Preview
 ---
+> Persistence Hide
+<!--more-->
 
-## 0x00 前言
+# 隐藏后门
 
-Persistence Hide
-
-## 0x01 隐藏后门
-
-### attrib
+## attrib
 
 显示、设置或删除分配给文件或目录的属性
 

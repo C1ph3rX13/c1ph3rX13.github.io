@@ -1,18 +1,19 @@
 ---
-title: "Hide Cmd"
+title: C&C++ Hide CMD
 date: 2023-11-30T16:24:30+08:00
 draft: false
 url: /posts/2023-11-30/Hide-Cmd
-tags: ["C++","Anti"]
+tags:
+  - C++
+  - Anti
+slug: English Preview
 ---
+> C&C++ Hide CMD 控制台程序的实现方法
+<!--more-->
 
-## 0x00 前言
+# 控制台窗口程序
 
-控制台程序的实现方法
-
-## 0x01 控制台窗口程序
-
-### 控制台窗口
+## 控制台窗口
 
 使用 `GetConsoleWindow` 获取控制台窗口的句柄，然后使用 `ShowWindow` 函数将其隐藏
 
@@ -29,7 +30,7 @@ int main() {
 }
 ```
 
-### 子进程窗口隐藏
+## 子进程窗口隐藏
 
 如果你的程序启动了一个子进程（例如，通过 `CreateProcess` 函数），你可以通过设置 `STARTUPINFO` 结构体的 `dwFlags` 成员来隐藏子进程的控制台窗口。
 
@@ -52,7 +53,7 @@ int main() {
 }
 ```
 
-## 0x02 GUI程序的实现方法
+# GUI程序的实现方法
 
 在Windows上，`WinMain` 和 `wWinMain` 都是 Windows 应用程序的入口点。它们的主要区别在于字符集和参数类型。
 
@@ -68,7 +69,7 @@ int main() {
 
    - `wWinMain` 的参数使用 `LPWSTR` 表示字符串，即 Unicode 字符串。
 
-### WinMain
+## WinMain
 
 在Windows API中，`CALLBACK` 是一个宏，通常用于标识回调函数的类型。这个宏的定义为：
 
@@ -121,7 +122,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 }
 ```
 
-### wWinMain
+## wWinMain
 
 1. `APIENTRY` 是一个宏，用于标识函数的调用约定。在 Windows API 中，`APIENTRY` 通常被定义为 `__stdcall`，这是一种常见的调用约定。
 

@@ -1,18 +1,17 @@
 ---
-title: "Selenium Config Golang"
+title: Selenium Config Golang
 date: 2023-10-18T17:47:26+08:00
 draft: false
 url: /posts/2023-10-12/Selenium-Config-Golang
-tags: ["Golang","Selenium"]
+tags:
+  - Golang
+  - Selenium
+slug: English-Preview
 ---
+> Selenium Golang Usage Note
+# Base Config
 
-## 0x00 前言
-
-Selenium Golang Usage Note - Base Config
-
-## 0x01 Base Config
-
-### Webdriver Path
+## Webdriver Path
 
 ```go
 import (
@@ -26,10 +25,11 @@ const (
 	port             = 4443
 )
 ```
+<!--more-->
 
-### Server & Client Config
+## Server & Client Config
 
-#### Server Config
+### Server Config
 
 Selenium Golang 不能像 Python 一样自启动 Driver，需要先设置
 
@@ -41,7 +41,7 @@ Selenium Golang 不能像 Python 一样自启动 Driver，需要先设置
 	}
 ```
 
-#### Client Config
+### Client Config
 
 1. 设置 Google Chrome 的启动参数
 2. 将启动参数添加到配置
@@ -87,7 +87,7 @@ Selenium Golang 不能像 Python 一样自启动 Driver，需要先设置
 	time.Sleep(time.Second * 3)
 ```
 
-## 0x02 Element
+# Element
 
 Selenium Golang 提供的元素定位方法与 Python 类似
 
@@ -109,16 +109,16 @@ Selenium Golang 提供的元素定位方法与 Python 类似
 	_ = btn.Click()
 ```
 
-## 0x03 Cookies
+# Cookies
 
-### 获取 Cookies 
+## 获取 Cookies 
 
 ```go
 	// 获取 cookies
 	cookies, _ := driver.GetCookies()
 ```
 
-### 转换 Cookies
+## 转换 Cookies
 
 `go-resty` 使用，转换的类型为：`[]*http.Cookie`
 
@@ -135,7 +135,7 @@ Selenium Golang 提供的元素定位方法与 Python 类似
 	}
 ```
 
-### Cookies 编码
+## Cookies 编码
 
 `go-resty` 接收的 Cookies 类型为：`[]*http.Cookie`，当包含特殊字符时报错：
 

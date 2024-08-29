@@ -7,13 +7,11 @@ tags:
   - Windows
   - Persistence
   - Time-Providers
+slug: English-Preview
 ---
-
-## 0x00 前言
-
-Persistence Time Providers
-
-## 0x01  Time Providers
+> Persistence Time Providers
+<!--more-->
+# Time Providers
 
 时间提供程序以 DLL 文件的形式实现，该文件位于 System32 文件夹中；**W32Time**服务在 Windows 启动期间启动并加载 w32time.dll
 
@@ -26,7 +24,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\NtpCl
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\NtpServer
 ```
 
-##  0x02 利用原理
+# 利用原理
 
 注册表利用
 

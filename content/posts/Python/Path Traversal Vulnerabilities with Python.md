@@ -1,12 +1,16 @@
 ---
-title: "Path Traversal Vulnerabilities With Python"
+title: Path Traversal Vulnerabilities With Python
 date: 2023-10-20T10:59:14+08:00
 draft: false
 url: /posts/2023-10-20/Path-Traversal-Vulnerabilities-With-Python
-tags: ["Python","httpx","requests"]
+tags:
+  - Python
+  - httpx
+  - requests
+slug: English-Preview
 ---
-
-## 前言
+> Path Traversal Vulnerabilities With Python
+# Question
 
 使用 httpx 发现包含路径穿越的 `/../` 的路径在请求的时候会被自动去除
 
@@ -20,23 +24,24 @@ url = target + f'/media/xpack/../replay/'
 # Url Output
 '/media/xpack/replay/'
 ```
+<!--more-->
 
-## 原因
+# Reason
 
 参考文章：https://mazinahmed.net/blog/testing-for-path-traversal-with-python/
 
 我在 httpx 社区的提问：https://github.com/encode/httpx/discussions/2897
 
-## 解决
+# Resolution
 
-### urllib.request
+## urllib.request
 
 ```python
 url = "https://example.com/../../../etc/passwd"
 urllib.request.urlopen(url)
 ```
 
-### requests.Request
+## requests.Request
 
 ```python
 url = "https://example.com/../../../etc/passwd"
@@ -46,8 +51,8 @@ with requests.Session() as s:
     prep.url = url
     req = s.send(prep, verify=False)
 ```
-AND
 
+AND
 ```python
 url = "https://example.com/../../../etc/passwd"
 s = requests.Session()
@@ -56,7 +61,7 @@ prep = r.prepare()
 prep.url = url
 ```
 
-### Using urllib3.HTTPConnectionPool
+## Using urllib3.HTTPConnectionPool
 
 ```python
 import urllib3
@@ -66,7 +71,7 @@ r = pool.urlopen("GET", "/../../../../doing/certain/check")
 print(r.status)
 ```
 
-### Downgrading urllib3
+## Downgrading urllib3
 
 + 降级 requests 或 urllib3
 

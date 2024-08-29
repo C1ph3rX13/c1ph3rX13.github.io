@@ -7,15 +7,13 @@ tags:
   - Windows
   - Persistence
   - Change-Default-File-Association
+slug: English-Preview
 ---
+> Persistence Change Default File Association
+<!--more-->
 
-## 0x00 前言
-
-Persistence Change Default File Association
-
-## 0x01 Change Default File Association
-
-### 原理
+# Change Default File Association
+## 原理
 
 Windows中，每个文件扩展名都与一个默认程序关联，关联通过注册表实现
 
@@ -29,7 +27,7 @@ HKEY_CLASSES_ROOT
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts
 ```
 
-### assoc
+## assoc
 
 显示或修改文件扩展名关联。 如果不带参数使用，assoc 将显示所有当前文件扩展名关联的列表
 
@@ -51,7 +49,7 @@ assoc .txt
 assoc .bak=
 ```
 
-### ftype
+## ftype
 
 显示或修改文件扩展名关联中使用的文件类型
 
@@ -71,7 +69,7 @@ ftype txtfile
 ftype example=
 ```
 
-## 0x02 优雅的方法
+# 优雅的方法
 
 使用`ProxyAPP`劫持对应的程序，使Beacon上线过程中达到无感
 
@@ -81,7 +79,7 @@ ftype example=
 >
 > 权限：需要管理员权限修改注册表
 
-### main.cpp
+## main.cpp
 
 ```c
 #include <stdio.h>
@@ -142,7 +140,7 @@ int main(int argc, char *argv[])
 }
 ```
 
-### 修改注册表
+## 修改注册表
 
 ```cmd
 HKEY_CLASSES_ROOT\txtfile\shell\open\command

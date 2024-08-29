@@ -6,15 +6,13 @@ url: /posts/2023-08-24/Persistence-CMD
 tags:
   - Windows
   - Persistence
+slug: English-Preview
 ---
+> Persistence CMD
 
-## 0x00 前言
 
-后渗透 权限维持
-
-## 0x01 隐藏后门
-
-### attrib
+# 隐藏后门
+## attrib
 
 显示、设置或删除分配给文件或目录的属性
 
@@ -25,18 +23,14 @@ tags:
 ```cmd
 attrib +h +s "<path to executable>"
 ```
-
-## 0x02 User
-
-### 1. Shortcut Modification
+# User
+## 1. Shortcut Modification
 
 原理是改写快捷方式的`target`，然后移动快捷方式移动到自启动目录中
 
 参考：https://pentestlab.blog/2019/10/08/persistence-shortcut-modification/
-
-### 2. Change Default File Association
-
-#### 原理
+## 2. Change Default File Association
+### 原理
 
 Windows中，每个文件扩展名都与一个默认程序关联，关联通过注册表实现
 
@@ -49,8 +43,7 @@ HKEY_CLASSES_ROOT
 # Local
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts
 ```
-
-#### assoc
+### assoc
 
 显示或修改文件扩展名关联。 如果不带参数使用，assoc 将显示所有当前文件扩展名关联的列表
 
@@ -71,8 +64,7 @@ assoc .txt
 # 请确保在等号后添加空格
 assoc .bak=
 ```
-
-#### ftype
+### ftype
 
 显示或修改文件扩展名关联中使用的文件类型
 
@@ -91,8 +83,7 @@ ftype txtfile
 ```cmd
 ftype example=
 ```
-
-#### 优雅的方法
+### 优雅的方法
 
 仅使用“ ProxyApp ”应用程序和处理扩展程序默认程序的注册表项，即可仅对一个扩展程序手动执行劫持上线过程
 
@@ -101,8 +92,7 @@ ftype example=
 > 字符集：Unicode
 >
 > 权限：需要管理员权限修改注册表
-
-##### main.cpp
+#### main.cpp
 
 ```c
 #include <stdio.h>
@@ -162,8 +152,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 ```
-
-##### 注册表
+#### 注册表
 
 ```cmd
 HKEY_CLASSES_ROOT\txtfile\shell\open\command
@@ -174,8 +163,7 @@ C:\ProgramData\ProxyApp.exe %SystemRoot%\system32\NOTEPAD.EXE %1
 # 命令
 reg.exe add "HKEY_CLASSES_ROOT\txtfile\shell\open\command" /ve /d "C:\ProgramData\ProxyApp.exe %SystemRoot%\system32\NOTEPAD.EXE %1" /f
 ```
-
-### 3. Screensaver
+## 3. Screensaver
 
 屏幕保护程序是具有 .scr 文件扩展名的可执行文件，并通过 scrnsave.scr 实用程序执行
 
@@ -187,8 +175,7 @@ HKEY_CURRENT_USER\Control Panel\Desktop\ScreenSaveActive
 HKEY_CURRENT_USER\Control Panel\Desktop\ScreenSaverIsSecure
 HKEY_CURRENT_USER\Control Panel\Desktop\ScreenSaveTimeOut
 ```
-
-#### 利用方法
+### 利用方法
 
 如果从未设置过屏保程序的话，除“ScreenSaveActive”默认值为1，其他键都是不存在的；屏保程序的正常运行必须保证这几个键都有数据才可以，因此必须把4个键都重写一遍；经测试屏保程序最短触发时间为60秒，即使改成小于60的数值，依然还是60秒后执行程序
 

@@ -7,31 +7,29 @@ tags:
   - Windows
   - Persistence
   - Lateral-Movement
+slug: English-Preview
 ---
+> Lateral Movement CMD
+> <!--more-->
+# 探测存活主机
 
-## 0x00 前言
+## Ping
 
-Lateral Movement CMD
-
-## 0x01 探测存活主机
-
-### Ping
-
-#### 探测存活主机
+### 探测存活主机
 
 ```cmd
 for /L %I in (1,1,254) DO @ping -w 1 -n 1 192.168.0.%I |findstr "TTL="
 ```
 
-#### 查询域名对应内网IP
+### 查询域名对应内网IP
 
 ```cmd
 for /f "delims=" %i in (D:/domains.txt) do @ping -w 1 -n 1 %i | findstr /c:"[192." >> c:/windows/temp/ds.txt
 ```
 
-### NC
+## NC
 
-#### 探测端口
+### 探测端口
 
 批量探测端口
 
@@ -64,9 +62,9 @@ for i in {101..102}; do nc.exe -vv -n -w 1 192.168.0.$i 21-25 -z; done
 - `for i in {101..102};`：这是一个 for 循环，迭代变量 `i` 的范围是从 101 到 102
 - `nc -vv -n -w 1 192.168.0.$i 21-25 -z;`：循环体内的命令，与第一个命令类似，但是用 `$i` 替代了 IP 地址的最后一位。这样，循环将分别尝试连接 192.168.0.101 和 192.168.0.102 主机上的端口范围 21-25
 
-## 0x02 探测端口&服务
+# 探测端口&服务
 
-### 常见端口
+## 常见端口
 
 | 服务       | 端口                            |
 | :--------- | :------------------------------ |

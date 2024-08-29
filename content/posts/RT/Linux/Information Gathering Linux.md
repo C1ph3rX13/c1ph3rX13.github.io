@@ -6,13 +6,12 @@ url: /posts/2024-01-08/Information-Gathering-Linux
 tags:
   - Linux
   - Information-Gathering
+slug: English-Preview
 ---
+> Information Gathering Linux
+> <!--more-->
 
-## 0x00 Description
-
-Information Gathering Linux
-
-## 0x01 Hidden
+# Hidden
 
 + 取消环境变量 `HISTFILE` 的设置
 
@@ -38,7 +37,7 @@ history -c
 set +o history
 ```
 
-## 0x02 Network
+# Network
 
 - 列出网络接口信息
 
@@ -107,7 +106,7 @@ cat /etc/services
 hostname -f
 ```
 
-## 0x03 System
+# System
 
 - 版本信息
 
@@ -118,20 +117,17 @@ uname -n # 系统主机名字
 uname -m # Linux内核架构
 ```
 
-
 - 内核信息 
 
 ```bash
 cat /proc/version
 ```
 
-
 - CPU信息
 
 ```bash
 cat /proc/cpuinfo
 ```
-
 
 - 发布信息
 
@@ -140,20 +136,17 @@ cat /etc/*-release
 cat /etc/issue
 ```
 
-
 - 主机名
 
 ```bash
 hostname
 ```
 
-
 - 文件系统
 
 ```bash
 df -a
 ```
-
 
 - 内核日志 
 
@@ -162,7 +155,7 @@ dmesg
 /var/log/dmesg
 ```
 
-## 0x04 Users
+# Users
 
 - 列出系统所有用户
 
@@ -264,7 +257,7 @@ cat /etc/sudoers
 sudo -l
 ```
 
-## 0x05 Env
+# Env
 
 - 打印系统环境信息
 
@@ -303,7 +296,7 @@ cat /etc/profile
 cat /etc/shells
 ```
 
-## 0x06 Process
+# Process
 
 - 查看进程信息
 
@@ -359,7 +352,7 @@ lsof -c $PID
 /proc/$PID/fd
 ```
 
-## 0x07 Service
+# Service
 
 - 由inetd管理的服务列表
 
@@ -391,7 +384,7 @@ cat /etc/exports
 sshd_config
 ```
 
-## 0x08 Crontab
+# Crontab
 
 - 显示指定用户的计划作业（root）
 
@@ -434,7 +427,7 @@ cat /var/spool/cron/crontabs/root
 /etc/rc.d/init.d/
 ```
 
-## 0x09 Installed Programs
+# Installed Programs
 
 - Redhat
 
@@ -485,7 +478,7 @@ pacman -Q
 emerge
 ```
 
-## 0x10 Files
+# Files
 
 - 最近五天的文件
 
@@ -499,14 +492,14 @@ find / -ctime +1 -ctime -5
 debugfs
 ```
 
-## 0x11 SSH Key
+# SSH Key
 
 ```bash
 ~/.ssh
 /etc/ssh
 ```
 
-## 0x12 logs
+# logs
 
 ```bash
 /var/log/boot.log
@@ -522,7 +515,7 @@ debugfs
 /var/run/utmp
 ```
 
-## 0x13 Virtual Env
+# Virtual Env
 
 ```bash
 lsmod | grep -i "vboxsf\|vboxguest"
@@ -532,7 +525,7 @@ lsmod | grep -i "virtio_pci\|virtio_net"
 lsmod | grep -i "hv_vmbus\|hv_blkvsc\|hv_netvsc\|hv_utils\|hv_storvsc"
 ```
 
-## 0x14 Container
+# Container
 
 ```bash
 capsh --print
@@ -544,7 +537,7 @@ mount
 ps aux
 ```
 
-## 0x15 Keyword
+# Keyword
 
 ```bash
 grep -i user [filename] 
@@ -556,7 +549,7 @@ grep -C 5 "password" [filename]
 find . -name "*.php" -print0 | xargs -0 grep -i -n "var $password" # Joomla
 ```
 
-## 0x16  History
+# History
 
 ```bash
 cat ~/.bash_history 
@@ -570,7 +563,7 @@ cat ~/.mysql_history
 cat ~/.php_history
 ```
 
-## 0x17 Configs
+# Configs
 
 ```bash
 cat /etc/syslog.conf

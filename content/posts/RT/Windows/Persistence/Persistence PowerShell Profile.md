@@ -7,13 +7,11 @@ tags:
   - Windows
   - PowerShell-Profile
   - Persistence
+slug: English-Preview
 ---
-
-## 0x00 前言
-
-Persistence PowerShell Profile
-
-## 0x01 PowerShell Profile
+> Persistence PowerShell Profile
+<!--more-->
+# PowerShell Profile
 
 PowerShell 配置文件脚本存储在“ **WindowsPowerShell** ”文件夹中，默认情况下该文件夹对用户隐藏
 

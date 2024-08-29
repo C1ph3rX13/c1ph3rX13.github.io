@@ -6,13 +6,17 @@ url: /posts/2023-09-07/Dockerfile-Parser
 tags:
   - Docker
   - Dockerfile-Parser
+slug: English-Preview
 ---
+> Dockerfile Parser
+<!--more-->
 
-## 0x00 概述
+# 概述
 
 当涉及到容器镜像的安全时，需要追溯镜像的来源和解析Dockerfile文件
 
-## 0x01 环境准备
+
+# 环境准备
 
 利用Dockfile构建一个反弹Shell的恶意镜像
 
@@ -32,9 +36,9 @@ ENTRYPOINT ["cron","-f","&&"]
 CMD ["/bin/bash"]
 ```
 
-## 0x02 镜像解析Dockerfile
+# 镜像解析Dockerfile
 
-### 1. 镜像文件解析
+## 镜像文件解析
 
 解析镜像的元数据信息
 
@@ -43,7 +47,7 @@ docker save -o test.tar test:v1.0
 tar -xvf test.tar
 ```
 
-### 2. docker命令参数
+## docker命令参数
 
 docker history 命令用来查看指定镜像一部分的创建历史
 
@@ -63,7 +67,7 @@ docker inspect 命令用来查看Docker镜像的详细信息
 docker inspect --format='{{json .Config}}' test:v1.0
 ```
 
-### 3. dfimage
+## dfimage
 
 dfimage，从镜像中提取 Dockerfile
 
@@ -73,7 +77,7 @@ alias dfimage="docker run -v /var/run/docker.sock:/var/run/docker.sock --rm alpi
 dfimage -sV=1.36  test:v1.0
 ```
 
-### 4. Dive
+## Dive
 
 Dive，分析和浏览 Docker 容器镜像内部
 

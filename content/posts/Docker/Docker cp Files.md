@@ -1,18 +1,21 @@
 ---
-title: Docker cp Files
+title: Docker CP Files
 date: 2023-09-14T16:55:51+08:00
 draft: false
-url: /posts/2023-09-14/Docker-cp-Files
+url: /posts/2023-09-14/Docker-CP-Files
 tags:
   - Docker
-  - Docker-cp-Files
+  - Docker-CP-Files
+slug: English-Preview
 ---
+> Docker CP Files
+<!--more-->
 
-## 0x01 概述
+# 概述
 
 当发生容器安全事件时，需要从容器或镜像中提取恶意文件进行分析和处理
 
-## 0x02 docker cp
+# docker cp
 
 从镜像运行启动一个容器，然后使用docker cp命令从容器中提取文件到宿主机
 
@@ -28,7 +31,7 @@ docker cp test:/tmp/evil.sh  /tmp/eill.sh
 docker rm test
 ```
 
-## 0x03 docker export
+# docker export
 
 `docker export` 命令可以将整个容器转储成一个 tar 归档文件，包括容器的文件系统和元数据信息
 
@@ -50,7 +53,7 @@ tar -xvf cdbef1ee1b9602e5bd6c1897f0eb4f32c64380e97e0d456e85f7c0920b4d9e7b/layer.
 eill.sh
 ```
 
-## 0x04 docker inspect
+# docker inspect
 
 `docker inspect` 命令用于获取 Docker 容器、镜像或网络等对象的详细信息
 

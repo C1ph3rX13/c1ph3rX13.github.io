@@ -7,15 +7,13 @@ tags:
   - Windows
   - Persistence
   - Registry-Run-Keys
+slug: English-Preview
 ---
+> Persistence Registry Run Keys
+<!--more-->
+# Registry Run Keys
 
-## 0x00 前言
-
-Persistence Registry Run Keys
-
-## 0x01 Registry Run Keys
-
-### 开始菜单启动项
+## 开始菜单启动项
 
 将后门程序放到上面的用户目录中，目标用户重新登录时便会启动后门程序
 
@@ -27,7 +25,7 @@ Persistence Registry Run Keys
 C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
 ```
 
-### 注册表启动项
+## 注册表启动项
 
 ```cmd
 # 当前用户键值  
@@ -42,7 +40,7 @@ HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunServices
 HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce
 ```
 
-### RunOnce 注册键
+## RunOnce 注册键
 
 用户登录时，所有程序按顺序自动执行，在 Run 启动项之前执行，但只能运行一次，执行完毕后会自动删除；用户重新登录时，便会启动后门程序
 
@@ -53,7 +51,7 @@ REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /V "<name>" /t REG_
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /V "backdoor" /t REG_SZ /F /D "C:\beacon.exe"
 ```
 
-### 其他
+## 其他
 
 ```cmd
 # executable 管理员权限

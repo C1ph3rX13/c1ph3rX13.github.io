@@ -1,18 +1,21 @@
 ---
-title: "Go Resty Transport"
+title: Go Resty Transport
 date: 2023-09-21T14:30:13+08:00
 draft: false
 url: /posts/2023-09-21/Go-Resty-Transport
-tags: ["Golang","Resty","Transport","高并发复用连接优化"]
+tags:
+  - Golang
+  - Resty
+  - Transport
+  - 高并发复用连接优化
+slug: English-Preview
 ---
+> Go Resty 高并发复用连接优化
+> <!--more-->
 
-## 0x00 前言
+# 优化思路
 
-Go Resty 高并发复用连接优化
-
-## 0x01 优化思路
-
-### resty\transport.go
+## resty\transport.go
 
 resty.New() 在创建客户端是 http.Transport 的默认配置相关
 
@@ -40,7 +43,7 @@ func createTransport(localAddr net.Addr) *http.Transport {
 }
 ```
 
-### http\transport.go
+## http\transport.go
 
 1. 创建了一个名为`clientConfig`的HTTP客户端配置
 
@@ -58,9 +61,9 @@ clientConfig := &http.Client{
 }
 ```
 
-## 0x02 优化代码
+# 优化代码
 
-### NewWithClient()
+## NewWithClient()
 
 使用`resty.NewWithClient()`传入自定义的`&http.Client`
 
@@ -68,7 +71,7 @@ clientConfig := &http.Client{
 restyClient := resty.NewWithClient(clientConfig)
 ```
 
-### SetTransport()
+## SetTransport()
 
 使用`SetTransport()`设置`MaxConnsPerHost`
 

@@ -7,19 +7,19 @@ tags:
   - Windows
   - Persistence
   - Image-File-Execution-Options
+slug: English-Preview
 ---
+> Persistence Image File Execution Options
+> <!--more-->
 
-## 0x00 前言
 
-Persistence Image File Execution Options
+# Image File Execution Options
 
-## 0x01 Image File Execution Options
-
-### 映像劫持
+## 映像劫持
 
 通过修改注册表路径IFEO（Image File Execution Options）的exe程序，然后进行重定向执行后门程序的过程
 
-### 修改Debugger值
+## 修改Debugger值
 
 1. 运行某exe程序时候，系统会在注册表`Image File Execution Options`中寻找是否存在exe的项
 
@@ -44,7 +44,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image F
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sethc.exe" /v Debugger /t REG_SZ /d "C:\Users\Administrator\Downloads\22.exe" /f
 ```
 
-### GlobalFlag
+## GlobalFlag
 
 `GlobalFlag` 注册表项中的十六进制值`0x200`启用进程的静默退出监视
 

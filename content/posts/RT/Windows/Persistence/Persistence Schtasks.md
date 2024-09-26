@@ -57,6 +57,7 @@ schtasks /end
   > - `/sc daily`：每天执行一次任务
   > - `/sc weekly`：每周执行一次任务
   > - `/sc monthly`：每月执行一次任务
+  > - `/sc minute`：每分钟执行一次任务
 
 + `<startdate>`：计划任务的开始日期。可以使用当前日期，例如YYYY/MM/DD
 
@@ -66,8 +67,18 @@ schtasks /create /tn <Task Name> /tr <command> /sc once /st <starttime> /sd <sta
 # Usages
 schtasks /create /tn <Task Name> /tr "<path to executable>" /sc once /st %TIME%
 
-schtasks /create /tn "MyTask" /tr "C:\Users\Public\Downloads\beacon.exe" /sc once /st 18:01 /sd 2023/08/21
+schtasks /create /tn "MyTask" /tr \"C:\Users\Public\Downloads\beacon.exe\" /sc once /st 18:01 /sd 2023/08/21
 ~~~
+
++ 分钟间隔无限制执行任务
+
+  > + `/mo`：设置分钟
+  > + `/st 00:00`：任务的开始时间，但由于是每分钟执行，实际执行时间将基于任务创建时的时间
+  > + `/ru SYSTEM`：任务将以 SYSTEM 用户权限运行
+
+```cmd
+schtasks /create /tn "<Task Name>" /tr "cmd.exe /c \"<path to executable>\"" /sc minute /mo 1 /st 00:00 /ru SYSTEM
+```
 
 ## 在系统空闲时运行计划任务
 

@@ -250,6 +250,15 @@ netsh advfirewall firewall add rule name="Remote Desktop" dir=in protocol=TCP lo
 netsh advfirewall firewall show rule name="Remote Desktop"
 ```
 
+探测内网中的存活机器
+
+~~~powershell
+for /l %i in (1,1,255) do @ping 192.168.0.%i -w 1 -n 1 | find /i "ttl="
+
+# Usages:
+for /l %i in (1,1,255) do @ping 192.168.52.%i -w 1 -n 1 | find /i "ttl="
+~~~
+
 ## 凭证信息
 
 WiFi密码

